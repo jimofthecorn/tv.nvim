@@ -24,7 +24,7 @@ end, {
 
     if #args <= 1 then
       local handle
-      if vim.fn.has('win32') then
+      if vim.fn.has('win32') == 1 then
           handle = io.popen("tv list-channels 2>/nul")
       else
           handle = io.popen("tv list-channels 2>/dev/null")
