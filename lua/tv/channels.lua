@@ -106,6 +106,7 @@ end
 
 function M.select()
   local handle
+  -- make it work on Windws...
   if vim.fn.has('win32') then
       handle = io.popen(config.current.tv_binary .. " list-channels 2>/nul")
   else
