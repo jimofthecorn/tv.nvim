@@ -23,7 +23,12 @@ end, {
     local args = vim.split(vim.trim(cmdline:sub(4)), "%s+", { trimempty = true })
 
     if #args <= 1 then
-      local handle = io.popen("tv list-channels 2>/dev/null")
+      local handle
+      if vim.fn.has('win32') then
+          handle = io.popen("tv list-channels 2>/nul")
+      else
+          handle = io.popen("tv list-channels 2>/dev/null")
+      end
       if not handle then
         return {}
       end

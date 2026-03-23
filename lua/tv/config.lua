@@ -61,7 +61,12 @@ local function discover_channels(tv_binary)
     return discovered_channels
   end
 
-  local handle = io.popen(tv_binary .. " list-channels 2>/dev/null")
+  local handle
+  if vim.fn.has('win32') then
+      handle = io.popen(tv_binary .. " list-channels 2>/nul")
+  else
+      handle = io.popen(tv_binary .. " list-channels 2>/dev/null")
+  end
   if not handle then
     return {}
   end

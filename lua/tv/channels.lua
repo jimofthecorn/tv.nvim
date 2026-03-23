@@ -105,7 +105,12 @@ function M.launch(channel_name, prompt_input)
 end
 
 function M.select()
-  local handle = io.popen(config.current.tv_binary .. " list-channels 2>/dev/null")
+  local handle
+  if vim.fn.has('win32') then
+      handle = io.popen(config.current.tv_binary .. " list-channels 2>/nul")
+  else
+      handle = io.popen(config.current.tv_binary .. " list-channels 2>/dev/null")
+  end
   if not handle then
     vim.notify("Failed to get available channels", vim.log.levels.ERROR)
     return
